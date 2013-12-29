@@ -45,7 +45,6 @@ if __name__ == '__main__':
 	lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 	print 'lucene', lucene.VERSION
 	base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-	print "base dir : ",base_dir
 
 	# directory to search
 	directory = SimpleFSDirectory(File(os.path.join(base_dir,INDEX_DIR)))

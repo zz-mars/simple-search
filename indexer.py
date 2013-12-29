@@ -86,7 +86,7 @@ class IndexFiles(object):
 					continue
 				try:
 					path = os.path.join(root,filename)
-					print "adding --- ",path
+					print "adding file : ",path
 					file = open(path)
 					contents = unicode(file.read(),'utf-8')
 					file.close()
@@ -108,10 +108,8 @@ if __name__ == '__main__':
 	lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 	print "lucene",lucene.VERSION
 	start = datetime.now()
-	print "argv : ",sys.argv
 	try:
 		base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-		print "base_dir : ",base_dir
 		IndexFiles(sys.argv[1],os.path.join(base_dir,INDEX_DIR),StandardAnalyzer(Version.LUCENE_CURRENT))
 		end = datetime.now()
 		print end-start
