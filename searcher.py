@@ -32,7 +32,7 @@ def run(searcher,analyzer):
 			return
 		print
 		print "Searching for:",command
-		query = QueryParser(Version.LUCENE_CURRENT,"contents",
+		query = QueryParser(Version.LUCENE_CURRENT,"name",
 				analyzer).parse(command)
 		scoreDocs = searcher.search(query,50).scoreDocs
 		print "%s total matching documents." % len(scoreDocs)

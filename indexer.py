@@ -69,13 +69,13 @@ class IndexFiles(object):
 		t1 = FieldType()
 		t1.setIndexed(True)
 		t1.setStored(True)
-		t1.setTokenized(False)
+		t1.setTokenized(True)
 		t1.setIndexOptions(FieldInfo.IndexOptions.DOCS_AND_FREQS)
 
 		t2 = FieldType()
 		t2.setIndexed(True)
 		t2.setStored(False)
-		t2.setTokenized(False)
+		t2.setTokenized(True)
 		t2.setIndexOptions(FieldInfo.IndexOptions.DOCS_AND_FREQS_AND_POSITIONS)
 
 		for root, dirnames,filenames in os.walk(root):
@@ -85,6 +85,7 @@ class IndexFiles(object):
 				if not filename.endswith('.c'):
 					continue
 				try:
+					# only add the filename and path for indexing
 					path = os.path.join(root,filename)
 					print "adding file : ",path
 					file = open(path)
@@ -93,10 +94,10 @@ class IndexFiles(object):
 					doc = Document()
 					doc.add(Field("name",filename,t1))
 					doc.add(Field("path",root,t1))
-					if len(contents) > 0:
-						doc.add(Field("contents",contents,t2))
-					else:
-						print "warning: no content in ",filename
+				#	if len(contents) > 0:
+				#		doc.add(Field("contents",contents,t2))
+				#	else:
+				#		print "warning: no content in ",filename
 					writer.addDocument(doc)
 				except Exception,e:
 					print "failed in indexDocs:",e
